@@ -1,1 +1,18 @@
-<p></p>
+<form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+    <mat-form-field apperance="fill">
+        <mat-label>Insira seu email</mat-label>
+        <input matInput placeholder="exemplo@exemplo.com" formControlName="email">
+        <mat-error *ngIf="formControls['email']?.invalid && (formControls['email']?.touched || isSubmitted)">Insira um email válido</mat-error>
+    </mat-form-field>
+    <mat-form-field apperance="fill">
+        <mat-label>Insira sua senha</mat-label>
+        <input matInput type="hidePassword ? 'password' : 'text'" formControlName="password">
+        <button mat-icon-button (click)="hidePassword = !hidePassword" [attr.aria-pressed]="!hidePassword">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="formControls['password']?.invalid && (formControls['password']?.touched || isSubmitted)">A senha é obrigatória</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Logar</button>
+</form>
+<a (click)="goToRegister()">Não Tem Conta? Clique aqui!</a>
